@@ -52,7 +52,7 @@ menu = {
 
 # 1. Set up order list. Order list will store a list of dictionaries for
 # menu item name, item price, and quantity ordered
-
+order = []
 
 # Launch the store and present a greeting to the customer
 print("Welcome to the variety food truck.")
@@ -118,22 +118,26 @@ while place_order:
                     }
                     i += 1
             # 2. Ask customer to input menu item number
-
+            customer_menu_item = input("What is the item menu number")
 
             # 3. Check if the customer typed a number
-
+            if customer_menu_item.isdigit():
                 # Convert the menu selection to an integer
-
+                    customer_menu_item = int(customer_menu_item)
 
                 # 4. Check if the menu selection is in the menu items
-
+                    for item in menu_items.keys():
+                        if item == customer_menu_item:
                     # Store the item name as a variable
-
+                            item_name = customer_menu_item
 
                     # Ask the customer for the quantity of the menu item
+                            customer_menu_item_quantity = input("How many would you like ?")
 
 
                     # Check if the quantity is a number, default to 1 if not
+                            quantity = customer_menu_item_quantity if customer_menu_item_quantity.isdigit() else 1
+
 
 
                     # Add the item name, price, and quantity to the order list
