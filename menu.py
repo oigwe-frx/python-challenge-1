@@ -175,25 +175,32 @@ while place_order:
                 # Default: Tell the customer to try again because they didn't type a valid input.
                 print("Invalid input. Please enter 'Y' or 'N'.")
 
-# Print out the customer's order
-print("This is what we are preparing for you.\n")
+# Print out the customer's order receipt
+print("This is your order receipt:\n")
 print("Item name                 | Price  | Quantity")
 print("--------------------------|--------|----------")
 
 # Loop through the items in the customer's order and print the receipt
 for item in order_list:
     item_name = item["Item name"]
-    item_price = item["Price"]
-    item_quantity = item["Quantity"]
+    price = item["Price"]
+    quantity = item["Quantity"]
 
-    num_item_spaces = 24 - len(item_name)
-    item_spaces = " " * num_item_spaces
+    # Calculate the number of empty spaces for formatting
+    item_spaces = " " * (25 - len(item_name))
+    price_spaces = " " * (10 - len(f"${price:.2f}"))
+    quantity_spaces = " " * (10 - len(str(quantity)))
 
-    price_spaces = " " * (8 - len(f"${item_price:.2f}"))
-    quantity_spaces = " " * (10 - len(str(item_quantity)))
+    # Create the space strings
+    formatted_item_name = item_name + item_spaces
+    formatted_price = f"${price:.2f}" + price_spaces
+    formatted_quantity = str(quantity) + quantity_spaces
 
-    print(f"{item_name}{item_spaces}| ${item_price:.2f}{price_spaces}| {item_quantity}{quantity_spaces}")
+    # Print the line for the receipt using the specified format
+    print(f"{formatted_item_name}| {formatted_price}| {formatted_quantity}")
 
 # Calculate the total cost of the order using list comprehension
 total_cost = sum([item["Price"] * item["Quantity"] for item in order_list])
-print(f"\nTotal cost of your order: ${total_cost:.2f}")
+
+# Display the total cost to the customer
+print("\nTotal cost of your order:", f"${total_cost:.2f}")
